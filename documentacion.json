@@ -1,0 +1,96 @@
+openapi: 3.0.3
+info:
+  title: DTOP
+  version: 1.0.1
+  description: API para un servicio de consulta de personas en plataforma
+servers:
+  - url: https://jose-manuel.herokuapp.com/con
+tags:
+  - name: personas
+    description: Servicios para personas
+  - name: usuarios
+    description: Servicios para usuarios de logeo
+paths:
+  /personas:
+    get:
+      tags:
+        - personas
+      summary: Servicio de consulta de personas en una coleccion de datos
+      description: Obtienenproductos que se encuentren en la base de datos.
+      responses:
+        '200' :
+          description: Se recuperaron todas las personas existentes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/personas'
+        '404' :
+          description: No se encontraron las personas de la consulta
+    post:
+      tags:
+        - personas
+      summary: Agregar persona a la coleccion
+      description: Se agrega una nueva persona a la base de datos
+      requestBody:
+        description: Informacion de la nueva persona
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/personas'
+        required: true
+      responses:
+        '200':
+          description: Se agrego correctamente
+    put:
+      tags:
+        - personas
+      summary: Modifica la persona pomedio del nombre
+      description: Se modifico la persona en la base de datos
+      requestBody:
+        description: Muestra la persona con la informacion modificada
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/personas'
+        required: true
+      responses:
+        '200':
+          description: Se modifico correctamente
+    delete:
+      tags:
+        - personas
+      summary: Elimana la persona pormedio del nombre
+      description: Se elimino la persona de la base de datos
+      parameters:
+        - in: query
+          name: nombre de la persona
+          schema:
+            type: string
+          description: ingresa el nombre de la persona que deseas eliminar
+      responses:
+        '200':
+          description: Se elimino correctamente
+          
+components:
+  schemas:
+    personas:
+      type: object
+      properties:
+        nombre:
+          type: string
+          example: "Tresom"
+        apaterno:
+          type: string
+          example: "Medcalfe"
+        aMaterno:
+          type: string
+          example: "Antoine"
+        expediente:
+          type: integer
+          example: 29114
+        email:
+          type: string
+          example: "amedcalfe0@omniture.com"
+        curp:
+          type: string
+          example: "ZURX272954HMSZOQ74"

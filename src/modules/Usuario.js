@@ -58,8 +58,8 @@ SchemaUsuario.methods.validarContrasena = function(password){
 //configuracion del JWT para generar un token que dure los dias que sean definidos//
 SchemaUsuario.methods.generaJWT = function(){
     const today = new Date();//fecha de inicio token
-    const exp = new Date();//fecha de expiracion
-    exp.setDate(today.getDate() + 7)
+    const expiracion = new Date();//fecha de expiracion
+    expiracion.setDate(today.getDate() + 60)
     return jwt.sign({
         id: this._id,
         username: this.username,

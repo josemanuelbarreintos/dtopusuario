@@ -1,9 +1,10 @@
 const Usuario = require("../modules/Usuario");
+const passport = require('passport')
 
 function login(req, res){
     const email = req.body.email;
     const pass = req.body.pass;
-    passport.autenticate("local",{session: false}, (err, user,info) => {
+    passport.authenticate("local",{session: false}, (err, user,info) => {
         if(err) return err
         if (user){
             user.token = user.generaJWT();
@@ -31,9 +32,16 @@ function obtenerUsuarios(req,res){
         res.send(user.publicData())
     })
 }
-
+function obtenerTodosUsuarios(req,res){
+   
+     Usuario.find()
+     .then(user =>{
+         res.status(200).send(user)
+     })
+ }
 module.exports ={
     login,
     agregarUsuario,
-    obtenerUsuarios
+    obtenerUsuarios,
+    obtenerTodosUsuarios
 }

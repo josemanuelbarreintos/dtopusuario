@@ -2,8 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("./src/config/passport");
 const app = express();
+var cors = require("cors");
 
 const bodyParser = require('body-parser');
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
